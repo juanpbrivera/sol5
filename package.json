@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "web-test",
-    "test:firefox": "web-test --browser=firefox",
-    "test:webkit": "web-test --browser=webkit",
-    "test:prod": "web-test --env=prod"
+    "test": "node run",
+    "test:firefox": "node run --browser=firefox",
+    "test:webkit": "node run --browser=webkit",
+    "test:prod": "node run --env=prod"
   },
   "dependencies": {
     "@automation/web-automation-framework": "file:../Framework5/src"
