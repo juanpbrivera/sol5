@@ -1,0 +1,13 @@
+{
+  "env": "cert",
+  "baseUrl": "https://playwright.dev",
+  "browser": "chromium",
+  "headless": true,
+  "trace": "retain-on-failure",
+  "video": false,
+  "screenshotOnFailure": true,
+  "contextOptions": {
+    "viewport": { "width": 1366, "height": 768 },
+    "locale": "es-PE"
+  }
+}
