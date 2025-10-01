@@ -3,9 +3,9 @@ module.exports = {
   default: {
     requireModule: ['ts-node/register/transpile-only'],
     require: [
-      // 1) REGISTRA el World del framework (side-effect)
-      '@automation/web-automation-framework/dist/cucumber/world/WebWorld.js',
-      // 2) tus hooks y steps
+      // Registra el World directamente desde support
+      'support/world.ts',
+      // tus hooks y steps
       'support/hooks.ts',
       'features/steps/**/*.ts'
     ],

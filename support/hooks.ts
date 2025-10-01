@@ -1,5 +1,6 @@
+// support/hooks.ts
 import { Before, After, setDefaultTimeout, Status } from '@cucumber/cucumber';
-import type { WebWorld } from '@automation/web-automation-framework'; // solo tipos
+import { WebWorld } from './world';
 
 setDefaultTimeout(60_000);
 
