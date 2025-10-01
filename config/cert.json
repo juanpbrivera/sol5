@@ -1,7 +1,7 @@
 {
   "env": "cert",
   "baseUrl": "https://playwright.dev",
-  "browser": "chromium",
+  "browser": "webkit",
   "headless": false,
   "trace": "retain-on-failure",
   "video": false,
