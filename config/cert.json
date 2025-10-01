@@ -2,7 +2,7 @@
   "env": "cert",
   "baseUrl": "https://playwright.dev",
   "browser": "chromium",
-  "headless": true,
+  "headless": false,
   "trace": "retain-on-failure",
   "video": false,
   "screenshotOnFailure": true,

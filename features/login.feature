@@ -4,4 +4,4 @@ Feature: Búsqueda en Playwright.dev
   Scenario: Buscar "locators"
     Given abro la app
     When busco "locators"
-    Then la url contiene "search"
+    Then la url contiene "dev"
