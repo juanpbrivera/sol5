@@ -2,14 +2,11 @@
   "name": "solucion5",
   "version": "1.0.0",
   "private": true,
-  "description": "Solution mínima BDD",
   "scripts": {
-    "pretest": "cd ../Framework5/src && npm run ensure-browser",
-    "test": "cucumber-js -p default",
-    "test:cert": "cucumber-js -p default -p cert",
-    "test:firefox": "cross-env BROWSER=firefox npm test",
-    "test:webkit": "cross-env BROWSER=webkit npm test",
-    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true}); require('fs').rmSync('reports',{recursive:true,force:true});\""
+    "test": "web-test",
+    "test:firefox": "web-test --browser=firefox",
+    "test:webkit": "web-test --browser=webkit",
+    "test:prod": "web-test --env=prod"
   },
   "dependencies": {
     "@automation/web-automation-framework": "file:../Framework5/src"
@@ -17,7 +14,6 @@
   "devDependencies": {
     "@cucumber/cucumber": "^12.2.0",
     "@types/node": "^24.1.0",
-    "cross-env": "^7.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
