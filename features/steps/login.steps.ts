@@ -1,4 +1,3 @@
-// features/steps/login.steps.ts
 import { Given, When, Then } from '@cucumber/cucumber';
 import type { WebWorld } from '@automation/web-automation-framework';
 
