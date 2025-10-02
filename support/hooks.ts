@@ -1,7 +1,7 @@
 import { Before, After, AfterAll, setDefaultTimeout, Status } from '@cucumber/cucumber';
 import { WebWorld, generateTestReport } from '@automation/web-automation-framework';
 
-setDefaultTimeout(60_000);
+setDefaultTimeout(5_000);
 
 Before(async function (this: WebWorld, scenario) {
   await this.initScenario(
