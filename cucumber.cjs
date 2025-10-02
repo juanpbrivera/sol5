@@ -1,14 +1,13 @@
 // cucumber.cjs
-const { createConfig } = require('@automation/web-automation-framework/cucumber/cucumber.base');
-
-module.exports = createConfig({
-  paths: {
-    world: 'support/world.ts',
-    hooks: 'support/hooks.ts',
-    steps: [
-      'features/steps/**/*.ts',
-      'test/steps/**/*.ts',
-      'test/step-definitions/**/*.ts'
-    ]
+module.exports = {
+  default: {
+    require: [
+      'support/world.ts',
+      'support/hooks.ts',
+      'features/steps/*.ts'  // Solo los steps necesarios, no recursivo
+    ],
+    requireModule: ['ts-node/register/transpile-only'],
+    format: ['progress'],
+    parallel: 0
   }
-});
+};
