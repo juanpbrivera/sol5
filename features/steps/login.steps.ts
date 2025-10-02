@@ -1,6 +1,6 @@
 // features/steps/login.steps.ts
 import { Given, When, Then } from '@cucumber/cucumber';
-import { WebWorld } from '../../support/world';
+import { WebWorld } from '@automation/web-automation-framework';
 
 Given('abro la app', async function (this: WebWorld) {
   await this.gotoBase('/');
