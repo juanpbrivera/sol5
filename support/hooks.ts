@@ -2,7 +2,7 @@ import { Before, After, AfterAll, setDefaultTimeout, Status } from '@cucumber/cu
 import { WebWorld } from './world';
 import { generateWordReport, ReportingInterceptor } from '@automation/web-automation-framework';
 
-setDefaultTimeout(60_000);
+setDefaultTimeout(5_000);
 
 Before(async function (this: WebWorld, scenario) {
   ReportingInterceptor.startScenario(
@@ -13,20 +13,24 @@ Before(async function (this: WebWorld, scenario) {
   await this.init();
   
   if (this.page) {
+    // Configurar viewport HD para mejor calidad
+    await this.page.setViewportSize({ width: 1366, height: 768 });
     ReportingInterceptor.attachToPage(this.page);
   }
 });
 
 After(async function (this: WebWorld, scenario) {
   try {
-    // Captura screenshot si falla
+    // Captura screenshot si falla con máxima calidad
     if (scenario.result?.status === Status.FAILED && this.page) {
-      const screenshotName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_'); // Sanitizar el nombre
+      // Esperar un momento para que la página se estabilice
+      await this.page.waitForTimeout(500);
+      
+      const screenshotName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_');
       await ReportingInterceptor.captureScreenshot(this.page, screenshotName);
     }
   } catch (error) {
     console.error('Error capturando screenshot:', error);
-    // No interrumpir el flujo si falla el screenshot
   }
   
   // Captura los pasos
@@ -47,7 +51,6 @@ After(async function (this: WebWorld, scenario) {
     await this.cleanup();
   } catch (error) {
     console.error('Error en cleanup:', error);
-    // No interrumpir el flujo
   }
 });
 
