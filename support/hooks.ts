@@ -21,6 +21,11 @@ Before(async function (this: WebWorld, scenario) {
 
 After(async function (this: WebWorld, scenario) {
   try {
+    // Capturar URL actual antes de fallar
+    if (this.page) {
+      const currentUrl = this.page.url();
+      ReportingInterceptor.updateCurrentUrl(currentUrl);
+    }
     // Captura screenshot si falla con máxima calidad
     if (scenario.result?.status === Status.FAILED && this.page) {
       // Esperar un momento para que la página se estabilice
