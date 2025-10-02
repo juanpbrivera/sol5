@@ -1,8 +1,19 @@
-import { setDefaultTimeout } from '@cucumber/cucumber';
-import { TestHooks } from '@automation/web-automation-framework';
+import { Before, After, AfterAll, setDefaultTimeout, Status } from '@cucumber/cucumber';
+import { WebWorld, generateTestReport } from '@automation/web-automation-framework';
 
 setDefaultTimeout(60_000);
 
-// Registrar todos los hooks del framework
-TestHooks.registerHooks();
+Before(async function (this: WebWorld, scenario) {
+  await this.initScenario(
+    scenario.pickle.name,
+    scenario.gherkinDocument.feature?.name
+  );
+});
 
+After(async function (this: WebWorld, scenario) {
+  await this.cleanupScenario(scenario, Status);
+});
+
+AfterAll(async function () {
+  await generateTestReport();
+});
