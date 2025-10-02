@@ -1,10 +1,10 @@
 import { Before, After, AfterAll, setDefaultTimeout, Status } from '@cucumber/cucumber';
-import { WebWorld, generateWordReport, ReportingInterceptor } from '@automation/web-automation-framework';
+import { WebWorld } from './world';
+import { generateWordReport, ReportingInterceptor } from '@automation/web-automation-framework';
 
 setDefaultTimeout(60_000);
 
 Before(async function (this: WebWorld, scenario) {
-  // Inicia captura de datos
   ReportingInterceptor.startScenario(
     scenario.pickle.name,
     scenario.gherkinDocument.feature?.name
@@ -12,17 +12,21 @@ Before(async function (this: WebWorld, scenario) {
   
   await this.init();
   
-  // Adjunta interceptors a la página
   if (this.page) {
     ReportingInterceptor.attachToPage(this.page);
   }
 });
 
 After(async function (this: WebWorld, scenario) {
-  // Captura screenshot si falla
-  if (scenario.result?.status === Status.FAILED && this.page) {
-    const screenshotName = scenario.pickle.name.replace(/\s+/g, '_');
-    await ReportingInterceptor.captureScreenshot(this.page, screenshotName);
+  try {
+    // Captura screenshot si falla
+    if (scenario.result?.status === Status.FAILED && this.page) {
+      const screenshotName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_'); // Sanitizar el nombre
+      await ReportingInterceptor.captureScreenshot(this.page, screenshotName);
+    }
+  } catch (error) {
+    console.error('Error capturando screenshot:', error);
+    // No interrumpir el flujo si falla el screenshot
   }
   
   // Captura los pasos
@@ -38,10 +42,15 @@ After(async function (this: WebWorld, scenario) {
     scenario.result?.message
   );
   
-  await this.cleanup();
+  // Limpieza
+  try {
+    await this.cleanup();
+  } catch (error) {
+    console.error('Error en cleanup:', error);
+    // No interrumpir el flujo
+  }
 });
 
-// Genera reporte Word al final
 AfterAll(async function () {
   const capturedData = ReportingInterceptor.getCapturedData();
   
