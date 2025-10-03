@@ -9,7 +9,8 @@ Before(async function (this: AutomatizacionWeb) {
 
 After(async function (this: AutomatizacionWeb, scenario) {
   if (scenario.result?.status === Status.FAILED) {
-    await this.capturarPantalla(scenario.pickle.name.replace(/\s+/g, '_'));
+    const nombreArchivo = scenario.pickle.name.replace(/\s+/g, '_');
+    await this.capturarPantalla(nombreArchivo);
   }
   await this.limpiar();
 });

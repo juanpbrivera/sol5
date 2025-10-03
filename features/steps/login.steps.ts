@@ -1,6 +1,6 @@
 // features/steps/login.steps.ts
 import { Given, When, Then } from '@cucumber/cucumber';
-import { AutomatizacionWeb  } from '@automation/web-automation-framework';
+import type { AutomatizacionWeb } from '@automation/web-automation-framework';
 
 Given('abro la app', async function (this: AutomatizacionWeb) {
   await this.abrirPaginaBase('/');
