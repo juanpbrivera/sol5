@@ -1,4 +1,4 @@
 import { setWorldConstructor } from '@cucumber/cucumber';
-import { WebWorld } from '@automation/web-automation-framework';
+import { AutomatizacionWeb } from '@automation/web-automation-framework';
 
-setWorldConstructor(WebWorld);
+setWorldConstructor(AutomatizacionWeb);

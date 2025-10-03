@@ -1,15 +1,15 @@
 // features/steps/login.steps.ts
 import { Given, When, Then } from '@cucumber/cucumber';
-import { WebWorld } from '@automation/web-automation-framework';
+import { AutomatizacionWeb  } from '@automation/web-automation-framework';
 
-Given('abro la app', async function (this: WebWorld) {
-  await this.gotoBase('/');
+Given('abro la app', async function (this: AutomatizacionWeb) {
+  await this.abrirPaginaBase('/');
 });
 
-When('busco {string}', async function (this: WebWorld, term: string) {
-  await this.typeByPlaceholder('Search', term, true);
+When('busco {string}', async function (this: AutomatizacionWeb, term: string) {
+  await this.escribirPorPlaceholder('Search', term, true);
 });
 
-Then('la url contiene {string}', async function (this: WebWorld, fragment: string) {
-  await this.urlIncludes(fragment);
+Then('la url contiene {string}', async function (this: AutomatizacionWeb, fragment: string) {
+  await this.esperarUrlContenga(fragment);
 });

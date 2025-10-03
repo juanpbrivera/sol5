@@ -2,7 +2,7 @@
 module.exports = {
   default: {
     require: [
-      'support/world.ts',
+      '@automation/web-automation-framework/dist/cucumber/world/AutomatizacionWeb.js',
       'support/hooks.ts',
       'features/steps/*.ts'  // Solo los steps necesarios, no recursivo
     ],
